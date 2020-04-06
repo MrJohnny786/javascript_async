@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="a.css">
+<title>Random user Generator</title>
+</head>
+
+<body>
+  <h1 class="title"> Random User Generator</h1>
+  <div class="user-profile">
+    <img id="avatar" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Jon_Snow_Season_8.png/220px-Jon_Snow_Season_8.png" />
+      <div id="fullname">Jon Snow</div>
+    <div id="username">
+      kingofnorth
+    </div>
+      <div class="description">
+        <div>Email: <span id="email">jon@hotmail.com</span></div>
+        <div>City: <span id="city">Winterfell</span></div>
+    </div>
+    <div class="footer">
+      <button id="btn">Next User!</button>
+   </div>
+  </div>
+</body>
+
+<script>
+  var tehname = document.querySelector('#fullname')
+  var username = document.querySelector('#username')
+  var mail = document.querySelector('#email')
+  var city = document.querySelector('#city')
+  var avatar = document.querySelector('#avatar')
+  var url = 'https://randomuser.me/api/'
+
+btn.addEventListener("click", function(){
+  fetch(url)
+  .then(handleErrors)
+  .then(function(data){
+    return data.json()
+  })
+  .then(function(data){
+    data = data.results[0]
+    var _mail = data.email || 'john@mekapses.com'
+    var _city = data.location.city || 'Kalamata'
+    var _name = data.name
+    var _image = data.picture.medium || 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/7/71/T1_Faker_2020_Split_1.png'
+    var _concat_names = _name.first + ' ' + _name.last || 'John Damilatis'
+    tehname.innerHTML = _concat_names
+    username.innerHTML = _name.title
+    mail.innerHTML = _mail
+    city.innerHTML = _city
+    avatar.src = _image 
+  })
+  .catch(function(error){
+    console.log('An error has occured')
+  })
+})
+
+function handleErrors(request){
+  if(!request.ok){
+    throw Error(request.status)
+  }
+  return request;
+}
+</script>
+
+</html>
