@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="a.css">
+<title>Title of the document</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bitcoin Current Price in Euro is: <span id="price">12</span></h1>
+        <button id='btn'>Refresh Data</button>
+      </div>
+</body>
+
+</html>
+
+<script>
+  var btn = document.querySelector('#btn');
+  var value = document.querySelector('#price');
+  
+  btn.addEventListener("click", function(){
+    var XHR = new XMLHttpRequest();
+    XHR.onreadystatechange = function() {
+    if(XHR.readyState == 4 && XHR.status == 200) {
+        data = JSON.parse(XHR.responseText)
+        euro = data.bpi.EUR.rate
+        console.log(euro)
+        value.innerHTML = euro
+    } 
+  }
+
+
+XHR.open("GET", "https://api.coindesk.com/v1/bpi/currentprice.json");
+XHR.send();
+  });
+  </script>
