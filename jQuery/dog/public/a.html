@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="a.css">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js">
+</script>
+<title>Title of the document</title>
+</head>
+
+<body>
+    <button id='btn'>
+      BACOOON
+    </button>
+    <p>
+      nothing yet
+    </p>
+</body>
+
+</html>
+
+<!-- <script>
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"
+</script> -->
+
+<script>
+    $("#btn").click(function(){
+      $.ajax({
+        method:"GET",
+        url: 'https://baconipsum.com/api/?type=meat-and-filler'
+      })
+      .done(function(data){
+        $("p").text(data)
+      })
+      .fail(function(){
+        alert("FAILED")
+      })
+    })
+</script>
